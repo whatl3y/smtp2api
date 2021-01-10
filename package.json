@@ -1,6 +1,6 @@
 {
   "name": "smtp2api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Send emails from an SMTP server to your own API.",
   "bin": {
     "smtp2api": "./dist/bin/smtpServer.js",
