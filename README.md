@@ -1,13 +1,23 @@
 # SMTP2API
 
-Small SMTP server that can take incoming emails and send them to
-an API that you specify.
+Small SMTP server that can take incoming emails and send them to an API that you specify.
 
 ## Install
 
 ```sh
 $ npm install -s smtp2api
 ```
+
+## Why?
+
+I wanted a way to take emails and forward them in an easy to consume format to an API.
+At the time of building I didn't find any good tools that supported this use case
+so figured building a lightweight SMTP server to do it for me would be the easiest
+way to go.
+
+In particular you can setup this server on a publically facing server, create an MX DNS
+record to it, and send emails to an email on that domain to forward those emails to an
+API.
 
 ## Simple Usage
 
