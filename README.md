@@ -38,7 +38,7 @@ listening on *:25
 ## API
 
 ```js
-import SMTP2API, { SMTP2APIOptions } from 'smtp2api'
+import SMTP2API from 'smtp2api'
 
 const smtp = SMTP2API(opts) // opts: SMTP2APIOptions
 smtp.startServer(port) // port: number (default: 25)

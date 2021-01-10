@@ -113,7 +113,7 @@ export default function SMTP2API({
               assert(smtpAuth.username === username, 'username is not valid')
               assert(smtpAuth.password === password, 'password is not valid')
             }
-            callback(null, { user: username })
+            callback(null, { user: username || 'default' })
           } catch (err) {
             callback(err)
           }
