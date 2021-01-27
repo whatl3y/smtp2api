@@ -19,6 +19,15 @@ In particular you can setup this server on a publically facing machine, create a
 record pointing to it, and send emails to an email on that domain to forward those emails to an
 API.
 
+### I only want to use this for one email address in my domain though...?
+
+If you already have an email provider like O365 or GSuite that is wired up to your domain
+and you would like this to only apply to emails sent to a specific email address, you can solve
+this by setting up an MX record on a sub domain and auto forward emails from the email address
+on your main domain to any email address on your smtp2api server.
+
+For example, if you want to send emails sent to `noreply@mydomain.com` to an API using smtp2api and mydomain.com is already using GSuite, you could setup an MX record for the subdomain `smtp2api.mydomain.com` pointing to your smtp2api server, autoforward emails sent to `noreply@mydomain.com` to `noreply@smtp2api.mydomain.com` in GSuite, and those emails would now go to your API.
+
 ## Simple Usage
 
 With the small script below you can use HELO, EHLO, or any other
@@ -42,7 +51,7 @@ console.log(`listening on *:${port}`)
 $ npm install -g smtp2api
 $
 $ # start SMTP server listening on port 25 that
-$ # sends emails to an API on localhost
+$ # sends emails to an API on localhost:8000
 $ smtp2api -e http://localhost:8000/my/api -p 25
 listening on *:25
 ```
