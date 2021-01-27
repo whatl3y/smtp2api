@@ -16,4 +16,4 @@ COPY . .
 RUN npm run build
 
 # Default command
-CMD node dist/bin/smtpServer.js -e $SMTP2API_ENDPOINT
+CMD node dist/bin/smtpServer.js -e $SMTP2API_ENDPOINT -p $PORT

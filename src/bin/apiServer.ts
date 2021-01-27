@@ -4,7 +4,7 @@ import express, { Request, Response } from 'express'
 
 const argv = minimist(process.argv.slice(2))
 const port = argv.p || argv.port || 8080
-;(async function apiServer() {
+;(function apiServer() {
   try {
     const app = express()
     app.use(bodyParser.json({ limit: '5mb' }))

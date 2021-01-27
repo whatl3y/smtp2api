@@ -15,15 +15,15 @@ At the time of building I didn't find any good tools that supported this use cas
 so figured building a lightweight SMTP server to do it for me would be the easiest
 way to go.
 
-In particular you can setup this server on a publically facing server, create an MX DNS
-record to it, and send emails to an email on that domain to forward those emails to an
+In particular you can setup this server on a publically facing machine, create an MX DNS
+record pointing to it, and send emails to an email on that domain to forward those emails to an
 API.
 
 ## Simple Usage
 
 With the small script below you can use HELO, EHLO, or any other
 email client to send an email to your API listening locally
-on port 8000 as JSON with Content-type: application/json.
+on port 8000 as JSON with HTTP header `Content-type: application/json`.
 
 ```ts
 import SMTP2API from 'smtp2api'
@@ -36,6 +36,8 @@ console.log(`listening on *:${port}`)
 
 ## CLI
 
+### Standalone
+
 ```sh
 $ npm install -g smtp2api
 $
@@ -43,6 +45,15 @@ $ # start SMTP server listening on port 25 that
 $ # sends emails to an API on localhost
 $ smtp2api -e http://localhost:8000/my/api -p 25
 listening on *:25
+```
+
+### Docker
+
+```sh
+$ git clone https://github.com/whatl3y/smtp2api
+$ cd smtp2api
+$ docker build -t smtp2api .
+$ docker run -e SMTP2API_ENDPOINT=http://localhost:8000/my/api -e PORT=25 smtp2api
 ```
 
 ## API
@@ -69,15 +80,16 @@ console.log(`listening on *:${port}`)
 
 ## Testing
 
-### API Server
+### Simple API Server
 
 If you'd like to test your SMTP server against a small API to see
-what the output looks like, we ship a dead simple API server that you can
-use to log the output.
+what the output looks like, we ship an API server that you can
+use to log the output of an incoming email.
 
 ```sh
 $ # Start a simple API server you can send emails to any route
 $ # that will listen in port 8080
+$ #
 $ # use `$ smtp2api -e http://localhost:8080/test` to pass emails
 $ # to this server.
 $ npx smtp2apiApiServer

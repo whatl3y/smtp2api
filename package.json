@@ -2,6 +2,10 @@
   "name": "smtp2api",
   "version": "0.0.3",
   "description": "Send emails from an SMTP server to your own API.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whatl3y/smtp2api"
+  },
   "bin": {
     "smtp2api": "./dist/bin/smtpServer.js",
     "smtp2apiApiServer": "./dist/bin/apiServer.js"

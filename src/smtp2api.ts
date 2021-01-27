@@ -75,7 +75,7 @@ export default function SMTP2API({
   onDataCallback,
   endpoint,
 }: SMTP2APIOptions) {
-  function buildAuthHeader(): HttpHeaders {
+  function buildApiAuthHeaders(): HttpHeaders {
     let header: HttpHeaders = {}
 
     if (apiAuth?.custom) {
@@ -127,7 +127,7 @@ export default function SMTP2API({
         try {
           // https://nodemailer.com/extras/mailparser/#mail-object
           const mail = await simpleParser(stream)
-          const authHeaders = buildAuthHeader()
+          const headers = buildApiAuthHeaders()
 
           const mailBody: ApiMailBody = {
             headers: Object.fromEntries(mail.headers),
@@ -140,9 +140,7 @@ export default function SMTP2API({
             attachments: mail.attachments,
           }
 
-          await axios.post(endpoint, mailBody, {
-            headers: authHeaders,
-          })
+          await axios.post(endpoint, mailBody, { headers })
 
           // if the user provides an extra onData function, have them
           // execute the callback instead of us
