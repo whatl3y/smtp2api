@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/whatl3y/smtp2api"
   },
+  "main": "./dist/smtp2api.js",
   "bin": {
     "smtp2api": "./dist/bin/smtpServer.js",
     "smtp2apiApiServer": "./dist/bin/apiServer.js"
