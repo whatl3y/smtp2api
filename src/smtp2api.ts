@@ -1,6 +1,6 @@
 import assert from 'assert'
 import axios from 'axios'
-import { simpleParser, EmailAddress } from 'mailparser'
+import { simpleParser, Attachment, EmailAddress } from 'mailparser'
 import {
   SMTPServerAuthentication,
   SMTPServerAuthenticationResponse,
@@ -8,6 +8,10 @@ import {
   SMTPServerSession,
   SMTPServer,
 } from 'smtp-server'
+
+export type SMTP2APIAttachment = Attachment & {
+  content: string
+}
 
 export interface ApiMailBody {
   headers: StringMap
@@ -17,7 +21,7 @@ export interface ApiMailBody {
   html?: string | false
   text?: string
   textHtml?: string
-  attachments?: any[]
+  attachments?: SMTP2APIAttachment[]
 }
 
 export type OnAuthCallback = (
@@ -140,7 +144,7 @@ export default function SMTP2API({
             attachments: mail.attachments.map((a) => ({
               ...a,
               content: a.content.toString('base64'),
-            })),
+            })) as SMTP2APIAttachment[],
           }
 
           await axios.post(endpoint, mailBody, { headers })
