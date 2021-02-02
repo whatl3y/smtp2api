@@ -137,7 +137,10 @@ export default function SMTP2API({
             html: mail.html,
             text: mail.text,
             textHtml: mail.textAsHtml,
-            attachments: mail.attachments,
+            attachments: mail.attachments.map((a) => ({
+              ...a,
+              content: a.content.toString('base64'),
+            })),
           }
 
           await axios.post(endpoint, mailBody, { headers })
